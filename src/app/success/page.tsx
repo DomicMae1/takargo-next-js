@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @next/next/no-img-element */
 "use client";
 
@@ -22,11 +23,7 @@ interface PengirimanData {
   total_keseluruhan: number;
 }
 
-export default function SuccessPage({
-  params,
-}: {
-  params: { kode_pengiriman: string };
-}) {
+export default function PaymentPage({ params }: any) {
   const { kode_pengiriman } = params;
   const [data, setData] = useState<PengirimanData | null>(null);
   const [isCopied, setIsCopied] = useState(false);

@@ -24,7 +24,13 @@ export default function ItemsPage() {
                 <h2 className="font-semibold">{p.name}</h2>
                 <p>Rp {p.price.toLocaleString()}</p>
                 <button
-                  onClick={() => addToCart({ ...p, quantity: 1 })}
+                  onClick={() =>
+                    addToCart({
+                      ...p,
+                      quantity: 1,
+                      qty: 0,
+                    })
+                  }
                   className="bg-blue-500 text-white px-3 py-1 rounded mt-2"
                 >
                   Tambah ke Keranjang
