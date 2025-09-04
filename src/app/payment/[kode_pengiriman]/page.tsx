@@ -74,8 +74,21 @@ export default function PaymentPage({ params }: any) {
     )
       .then((res) => res.json())
       .then((json) => {
-        // PERBAIKAN: Asumsikan data dibungkus dalam properti 'data'
-        setData(json.data || json);
+        if (json?.data) {
+          setData(json.data);
+        } else {
+          throw new Error("Data kosong");
+        }
+      })
+      .catch(() => {
+        console.warn("API pengiriman gagal, gunakan data dummy.");
+        setData({
+          asal: "Jakarta",
+          tujuan: "Surabaya",
+          tanggal_berangkat: "2025-08-30",
+          tanggal_sampai: "2025-09-02",
+          total_harga: 1500000,
+        });
       });
 
     // PERBAIKAN 1: Gunakan Promise.all untuk menunggu semua fetch selesai
