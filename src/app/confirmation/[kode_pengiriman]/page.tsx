@@ -30,12 +30,10 @@ const useShipmentStore = () => {
     telepon: "08987654321",
     alamat: "Jl. Gatot Subroto No. 2, Bandung",
   });
-
   const setPengirim = (newVal: Partial<typeof pengirim>) =>
     _setPengirim((prev) => ({ ...prev, ...newVal }));
   const setPenerima = (newVal: Partial<typeof penerima>) =>
     _setPenerima((prev) => ({ ...prev, ...newVal }));
-
   const nextStep = () => {
     if (step === "kontak") setStep("muatan");
     if (step === "muatan") setStep("konfirmasi");
@@ -44,7 +42,6 @@ const useShipmentStore = () => {
     if (step === "muatan") setStep("kontak");
     if (step === "konfirmasi") setStep("muatan");
   };
-
   return {
     step,
     setStep,
