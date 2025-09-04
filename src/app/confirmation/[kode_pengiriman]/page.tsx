@@ -1,10 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @next/next/no-img-element */
 "use client";
-import React from "react";
+import React, { useState, useEffect, FC } from "react";
 import NavbarShipment from "../../component/navbar-shipment";
 import { useRouter } from "next/navigation";
-import { useState, useEffect } from "react";
 import {
   MapPin,
   MapPinCheck,
@@ -80,7 +79,7 @@ type ConfirmationPageProps = {
   };
 };
 
-export default function ConfirmationPage({ params }: ConfirmationPageProps) {
+const ConfirmationPage: FC<ConfirmationPageProps> = ({ params }) => {
   const { kode_pengiriman } = params;
   const router = useRouter();
 
@@ -1200,4 +1199,4 @@ export default function ConfirmationPage({ params }: ConfirmationPageProps) {
       </div>
     </>
   );
-}
+};
