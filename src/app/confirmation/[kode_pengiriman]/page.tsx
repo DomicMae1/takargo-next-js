@@ -17,7 +17,45 @@ import {
   ChevronsUpDown,
   CircleX,
 } from "lucide-react";
-import { useShipmentStore } from "@/store/shipmentStore";
+
+const useShipmentStore = () => {
+  const [step, setStep] = useState("kontak");
+  const [pengirim, _setPengirim] = useState({
+    nama: "John Doe",
+    telepon: "08123456789",
+    alamat: "Jl. Jenderal Sudirman No. 1, Jakarta",
+  });
+  const [penerima, _setPenerima] = useState({
+    nama: "Jane Smith",
+    telepon: "08987654321",
+    alamat: "Jl. Gatot Subroto No. 2, Bandung",
+  });
+
+  const setPengirim = (newVal: Partial<typeof pengirim>) =>
+    _setPengirim((prev) => ({ ...prev, ...newVal }));
+  const setPenerima = (newVal: Partial<typeof penerima>) =>
+    _setPenerima((prev) => ({ ...prev, ...newVal }));
+
+  const nextStep = () => {
+    if (step === "kontak") setStep("muatan");
+    if (step === "muatan") setStep("konfirmasi");
+  };
+  const prevStep = () => {
+    if (step === "muatan") setStep("kontak");
+    if (step === "konfirmasi") setStep("muatan");
+  };
+
+  return {
+    step,
+    setStep,
+    nextStep,
+    prevStep,
+    pengirim,
+    penerima,
+    setPengirim,
+    setPenerima,
+  };
+};
 
 interface Pengiriman {
   asal: string;
@@ -38,11 +76,14 @@ interface Muatan {
   isOpen?: boolean;
 }
 
-export default function ConfirmationPage({
-  params,
-}: {
-  params: { kode_pengiriman: string };
-}) {
+// PERBAIKAN KUNCI 1: Definisikan tipe untuk props halaman sesuai standar Next.js
+type ConfirmationPageProps = {
+  params: {
+    kode_pengiriman: string;
+  };
+};
+
+export default function ConfirmationPage({ params }: ConfirmationPageProps) {
   const { kode_pengiriman } = params;
   const router = useRouter();
 
@@ -129,6 +170,12 @@ export default function ConfirmationPage({
       { ...prev[index], isOpen: true }, // copy field
       ...prev.slice(index + 1),
     ]);
+  };
+
+  const handleConfirmAndPay = () => {
+    console.log("Data siap dikirim:", { pengirim, penerima, muatanList });
+    // Menggunakan API browser standar untuk navigasi
+    window.location.href = `/payment/${kode_pengiriman}`;
   };
 
   useEffect(() => {
@@ -1132,14 +1179,10 @@ export default function ConfirmationPage({
                     </button>
 
                     <button
-                      onClick={() =>
-                        router.push(
-                          `http://api-takargo.test/api/pembayaran/${kode_pengiriman}`
-                        )
-                      }
+                      onClick={handleConfirmAndPay}
                       className="px-4 py-2 rounded-lg bg-[#0891B2] text-white hover:bg-[#0a7491] transition"
                     >
-                      Konfirmasi Pesanan
+                      Konfirmasi & Lanjut Bayar
                     </button>
                   </div>
                 </div>
