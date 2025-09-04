@@ -1,8 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
-import { usePathname } from "next/navigation";
+// PERBAIKAN: 'usePathname' tidak digunakan, jadi dihapus.
 import { useState, useEffect } from "react";
-import Link from "next/link";
+// PERBAIKAN: 'Link' dari Next.js diganti dengan tag 'a' standar untuk kompatibilitas
 import { Check, ChevronRight } from "lucide-react";
 
 export default function NavbarShipment({
@@ -43,13 +43,13 @@ export default function NavbarShipment({
     <nav className="bg-white px-20 py-4 flex items-center justify-between text-sm border border-gray-400">
       {/* Logo */}
       <div className="flex items-center space-x-3">
-        <Link href="/login">
+        <a href="/login">
           <img
             src="/takargo-logo.svg"
             alt="Takargo Logo"
             className="max-w-full h-auto object-contain cursor-pointer"
           />
-        </Link>
+        </a>
       </div>
 
       <div className="flex items-center space-x-8">
@@ -66,7 +66,7 @@ export default function NavbarShipment({
                   ${
                     isActive
                       ? "border-[#0891B2] text-[#0891B2]"
-                      : "text-gray-400"
+                      : "border-gray-300 text-gray-400"
                   }
                 `}
               >
@@ -114,7 +114,7 @@ export default function NavbarShipment({
         </a>
         <a
           href="/login"
-          className="px-4 py-2 bg-[#0891B2]  text-white rounded  transition"
+          className="px-4 py-2 bg-[#0891B2]   text-white rounded   transition"
         >
           Sign In
         </a>
