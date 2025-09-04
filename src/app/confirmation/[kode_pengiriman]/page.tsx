@@ -79,7 +79,11 @@ type ConfirmationPageProps = {
   };
 };
 
-const ConfirmationPage: FC<ConfirmationPageProps> = ({ params }) => {
+export default function ConfirmationPage({
+  params,
+}: {
+  params: { kode_pengiriman: string };
+}) {
   const { kode_pengiriman } = params;
   const router = useRouter();
 
@@ -1199,4 +1203,4 @@ const ConfirmationPage: FC<ConfirmationPageProps> = ({ params }) => {
       </div>
     </>
   );
-};
+}
