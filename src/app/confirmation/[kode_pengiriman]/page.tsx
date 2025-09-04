@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @next/next/no-img-element */
 "use client";
@@ -79,11 +80,7 @@ type ConfirmationPageProps = {
   };
 };
 
-export default function ConfirmationPage({
-  params,
-}: {
-  params: { kode_pengiriman: string };
-}) {
+export default function ConfirmationPage({ params }: any) {
   const { kode_pengiriman } = params;
   const router = useRouter();
 

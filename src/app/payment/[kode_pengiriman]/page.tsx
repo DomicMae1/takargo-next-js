@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @next/next/no-img-element */
 "use client";
 
@@ -38,11 +39,7 @@ const paymentOptions = [
   },
 ];
 
-export default function PaymentPage({
-  params,
-}: {
-  params: { kode_pengiriman: string };
-}) {
+export default function PaymentPage({ params }: any) {
   const { kode_pengiriman } = params;
   const [data, setData] = useState<Pengiriman | null>(null);
   const [openVA, setOpenVA] = useState(true);
